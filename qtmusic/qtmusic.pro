@@ -11,4 +11,10 @@ SOURCES += \
     mainwidget.cpp
 
 HEADERS += \
-        mainwidget.h
+    mainwidget.h
+
+FORMS += \
+    mainwidget.ui
+
+RESOURCES += \
+    image.qrc

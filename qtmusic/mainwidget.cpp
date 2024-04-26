@@ -1,23 +1,14 @@
 #include "mainwidget.h"
+#include "ui_mainwidget.h"
 
-#include <QFont>
-#include <QPalette>
-
-MainWidget::MainWidget(QWidget *parent) : QWidget(parent)
+MainWidget::MainWidget(QWidget *parent) :
+    QWidget(parent),
+    ui(new Ui::MainWidget)
 {
-    setWindowTitle(tr("一个空的QT项目"));
+    ui->setupUi(this);
+}
 
-    label = new QLabel(this);
-    label->setText(tr("Hello world!"));
-    label->setGeometry(200, 120, 300, 100);
-
-    /* set text size */
-    QFont ft;
-    ft.setPointSize(20);
-    label->setFont(ft);
-
-    /* set text color */
-    QPalette pa;
-    pa.setColor(QPalette::WindowText, Qt::red);
-    label->setPalette(pa);
+MainWidget::~MainWidget()
+{
+    delete ui;
 }
