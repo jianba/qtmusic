@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainWidget_t {
-    QByteArrayData data[1];
-    char stringdata0[11];
+    QByteArrayData data[9];
+    char stringdata0[159];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -32,10 +32,22 @@ struct qt_meta_stringdata_MainWidget_t {
     )
 static const qt_meta_stringdata_MainWidget_t qt_meta_stringdata_MainWidget = {
     {
-QT_MOC_LITERAL(0, 0, 10) // "MainWidget"
+QT_MOC_LITERAL(0, 0, 10), // "MainWidget"
+QT_MOC_LITERAL(1, 11, 22), // "on_btnCurMusic_clicked"
+QT_MOC_LITERAL(2, 34, 0), // ""
+QT_MOC_LITERAL(3, 35, 24), // "on_btnLocalMusic_clicked"
+QT_MOC_LITERAL(4, 60, 24), // "on_btnFavorMusic_clicked"
+QT_MOC_LITERAL(5, 85, 17), // "on_btnPre_clicked"
+QT_MOC_LITERAL(6, 103, 18), // "on_btnPlay_clicked"
+QT_MOC_LITERAL(7, 122, 18), // "on_btnNext_clicked"
+QT_MOC_LITERAL(8, 141, 17) // "on_btnAdd_clicked"
 
     },
-    "MainWidget"
+    "MainWidget\0on_btnCurMusic_clicked\0\0"
+    "on_btnLocalMusic_clicked\0"
+    "on_btnFavorMusic_clicked\0on_btnPre_clicked\0"
+    "on_btnPlay_clicked\0on_btnNext_clicked\0"
+    "on_btnAdd_clicked"
 };
 #undef QT_MOC_LITERAL
 
@@ -45,21 +57,50 @@ static const uint qt_meta_data_MainWidget[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       0,    0, // methods
+       7,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
        0,       // signalCount
 
+ // slots: name, argc, parameters, tag, flags
+       1,    0,   49,    2, 0x08 /* Private */,
+       3,    0,   50,    2, 0x08 /* Private */,
+       4,    0,   51,    2, 0x08 /* Private */,
+       5,    0,   52,    2, 0x08 /* Private */,
+       6,    0,   53,    2, 0x08 /* Private */,
+       7,    0,   54,    2, 0x08 /* Private */,
+       8,    0,   55,    2, 0x08 /* Private */,
+
+ // slots: parameters
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+
        0        // eod
 };
 
 void MainWidget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
-    Q_UNUSED(_o);
-    Q_UNUSED(_id);
-    Q_UNUSED(_c);
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        auto *_t = static_cast<MainWidget *>(_o);
+        Q_UNUSED(_t)
+        switch (_id) {
+        case 0: _t->on_btnCurMusic_clicked(); break;
+        case 1: _t->on_btnLocalMusic_clicked(); break;
+        case 2: _t->on_btnFavorMusic_clicked(); break;
+        case 3: _t->on_btnPre_clicked(); break;
+        case 4: _t->on_btnPlay_clicked(); break;
+        case 5: _t->on_btnNext_clicked(); break;
+        case 6: _t->on_btnAdd_clicked(); break;
+        default: ;
+        }
+    }
     Q_UNUSED(_a);
 }
 
@@ -89,6 +130,17 @@ void *MainWidget::qt_metacast(const char *_clname)
 int MainWidget::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
     _id = QWidget::qt_metacall(_c, _id, _a);
+    if (_id < 0)
+        return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        if (_id < 7)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 7;
+    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
+        if (_id < 7)
+            *reinterpret_cast<int*>(_a[0]) = -1;
+        _id -= 7;
+    }
     return _id;
 }
 QT_WARNING_POP

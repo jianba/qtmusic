@@ -2,6 +2,9 @@
 # author    hancq
 # date      2016-08-05
 
+QT += multimedia
+QT += core gui sql
+
 QT += widgets
 
 TARGET = qtmusic

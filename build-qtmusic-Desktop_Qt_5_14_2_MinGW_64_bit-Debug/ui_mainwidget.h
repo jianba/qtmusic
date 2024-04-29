@@ -11,7 +11,10 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QSlider>
+#include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QStackedWidget>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
@@ -23,27 +26,52 @@ class Ui_MainWidget
 public:
     QStackedWidget *stackedWidget;
     QWidget *page;
+    QPushButton *pushButton;
     QWidget *page_2;
+    QPushButton *pushButton_2;
+    QWidget *page_3;
+    QPushButton *pushButton_3;
     QWidget *widget;
     QVBoxLayout *verticalLayout;
     QPushButton *btnCurMusic;
     QPushButton *btnLocalMusic;
     QPushButton *btnFavorMusic;
+    QSlider *positionSlider;
+    QWidget *horizontalLayoutWidget;
+    QHBoxLayout *horizontalLayout;
+    QPushButton *btnPre;
+    QSpacerItem *horizontalSpacer;
+    QPushButton *btnPlay;
+    QSpacerItem *horizontalSpacer_2;
+    QPushButton *btnNext;
+    QPushButton *btnAdd;
 
     void setupUi(QWidget *MainWidget)
     {
         if (MainWidget->objectName().isEmpty())
             MainWidget->setObjectName(QString::fromUtf8("MainWidget"));
-        MainWidget->resize(573, 474);
+        MainWidget->resize(690, 483);
         stackedWidget = new QStackedWidget(MainWidget);
         stackedWidget->setObjectName(QString::fromUtf8("stackedWidget"));
         stackedWidget->setGeometry(QRect(309, 90, 161, 131));
         page = new QWidget();
         page->setObjectName(QString::fromUtf8("page"));
+        pushButton = new QPushButton(page);
+        pushButton->setObjectName(QString::fromUtf8("pushButton"));
+        pushButton->setGeometry(QRect(20, 60, 75, 23));
         stackedWidget->addWidget(page);
         page_2 = new QWidget();
         page_2->setObjectName(QString::fromUtf8("page_2"));
+        pushButton_2 = new QPushButton(page_2);
+        pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
+        pushButton_2->setGeometry(QRect(30, 70, 75, 23));
         stackedWidget->addWidget(page_2);
+        page_3 = new QWidget();
+        page_3->setObjectName(QString::fromUtf8("page_3"));
+        pushButton_3 = new QPushButton(page_3);
+        pushButton_3->setObjectName(QString::fromUtf8("pushButton_3"));
+        pushButton_3->setGeometry(QRect(40, 70, 75, 23));
+        stackedWidget->addWidget(page_3);
         widget = new QWidget(MainWidget);
         widget->setObjectName(QString::fromUtf8("widget"));
         widget->setGeometry(QRect(40, 120, 93, 99));
@@ -64,8 +92,47 @@ public:
 
         verticalLayout->addWidget(btnFavorMusic);
 
+        positionSlider = new QSlider(MainWidget);
+        positionSlider->setObjectName(QString::fromUtf8("positionSlider"));
+        positionSlider->setGeometry(QRect(140, 270, 271, 31));
+        positionSlider->setOrientation(Qt::Horizontal);
+        horizontalLayoutWidget = new QWidget(MainWidget);
+        horizontalLayoutWidget->setObjectName(QString::fromUtf8("horizontalLayoutWidget"));
+        horizontalLayoutWidget->setGeometry(QRect(140, 330, 271, 51));
+        horizontalLayout = new QHBoxLayout(horizontalLayoutWidget);
+        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+        horizontalLayout->setContentsMargins(0, 0, 0, 0);
+        btnPre = new QPushButton(horizontalLayoutWidget);
+        btnPre->setObjectName(QString::fromUtf8("btnPre"));
+
+        horizontalLayout->addWidget(btnPre);
+
+        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout->addItem(horizontalSpacer);
+
+        btnPlay = new QPushButton(horizontalLayoutWidget);
+        btnPlay->setObjectName(QString::fromUtf8("btnPlay"));
+
+        horizontalLayout->addWidget(btnPlay);
+
+        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout->addItem(horizontalSpacer_2);
+
+        btnNext = new QPushButton(horizontalLayoutWidget);
+        btnNext->setObjectName(QString::fromUtf8("btnNext"));
+
+        horizontalLayout->addWidget(btnNext);
+
+        btnAdd = new QPushButton(MainWidget);
+        btnAdd->setObjectName(QString::fromUtf8("btnAdd"));
+        btnAdd->setGeometry(QRect(500, 350, 75, 23));
 
         retranslateUi(MainWidget);
+
+        stackedWidget->setCurrentIndex(2);
+
 
         QMetaObject::connectSlotsByName(MainWidget);
     } // setupUi
@@ -73,9 +140,16 @@ public:
     void retranslateUi(QWidget *MainWidget)
     {
         MainWidget->setWindowTitle(QCoreApplication::translate("MainWidget", "Form", nullptr));
+        pushButton->setText(QCoreApplication::translate("MainWidget", "test1", nullptr));
+        pushButton_2->setText(QCoreApplication::translate("MainWidget", "test2", nullptr));
+        pushButton_3->setText(QCoreApplication::translate("MainWidget", "test3", nullptr));
         btnCurMusic->setText(QCoreApplication::translate("MainWidget", "\345\275\223\345\211\215\346\222\255\346\224\276", nullptr));
         btnLocalMusic->setText(QCoreApplication::translate("MainWidget", "\346\234\254\345\234\260\351\237\263\344\271\220", nullptr));
         btnFavorMusic->setText(QCoreApplication::translate("MainWidget", "\346\210\221\345\226\234\346\254\242", nullptr));
+        btnPre->setText(QCoreApplication::translate("MainWidget", "1", nullptr));
+        btnPlay->setText(QCoreApplication::translate("MainWidget", "2", nullptr));
+        btnNext->setText(QCoreApplication::translate("MainWidget", "3", nullptr));
+        btnAdd->setText(QCoreApplication::translate("MainWidget", "PushButton", nullptr));
     } // retranslateUi
 
 };
