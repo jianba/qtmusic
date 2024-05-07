@@ -16,42 +16,38 @@
   <widget class="QStackedWidget" name="stackedWidget">
    <property name="geometry">
     <rect>
-     <x>309</x>
-     <y>90</y>
-     <width>161</width>
-     <height>131</height>
+     <x>150</x>
+     <y>30</y>
+     <width>371</width>
+     <height>251</height>
     </rect>
    </property>
    <property name="currentIndex">
-    <number>2</number>
+    <number>1</number>
    </property>
-   <widget class="QWidget" name="page">
-    <widget class="QPushButton" name="pushButton">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>60</y>
-       <width>75</width>
-       <height>23</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>test1</string>
-     </property>
-    </widget>
-   </widget>
+   <widget class="QWidget" name="page_1"/>
    <widget class="QWidget" name="page_2">
-    <widget class="QPushButton" name="pushButton_2">
+    <widget class="MusicListWidget" name="localMusicWidget" native="true">
      <property name="geometry">
       <rect>
        <x>30</x>
        <y>70</y>
+       <width>241</width>
+       <height>151</height>
+      </rect>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>10</y>
        <width>75</width>
        <height>23</height>
       </rect>
      </property>
      <property name="text">
-      <string>test2</string>
+      <string>xxxx</string>
      </property>
     </widget>
    </widget>
@@ -75,7 +71,7 @@
    <property name="geometry">
     <rect>
      <x>40</x>
-     <y>120</y>
+     <y>50</y>
      <width>93</width>
      <height>99</height>
     </rect>
@@ -107,8 +103,8 @@
   <widget class="QSlider" name="positionSlider">
    <property name="geometry">
     <rect>
-     <x>140</x>
-     <y>270</y>
+     <x>130</x>
+     <y>340</y>
      <width>271</width>
      <height>31</height>
     </rect>
@@ -120,8 +116,8 @@
   <widget class="QWidget" name="horizontalLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>140</x>
-     <y>330</y>
+     <x>130</x>
+     <y>400</y>
      <width>271</width>
      <height>51</height>
     </rect>
@@ -179,8 +175,8 @@
   <widget class="QPushButton" name="btnAdd">
    <property name="geometry">
     <rect>
-     <x>500</x>
-     <y>350</y>
+     <x>460</x>
+     <y>420</y>
      <width>75</width>
      <height>23</height>
     </rect>
@@ -190,6 +186,14 @@
    </property>
   </widget>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>MusicListWidget</class>
+   <extends>QWidget</extends>
+   <header>musiclistwidget.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

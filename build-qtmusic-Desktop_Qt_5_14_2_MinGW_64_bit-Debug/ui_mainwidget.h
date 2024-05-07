@@ -18,6 +18,7 @@
 #include <QtWidgets/QStackedWidget>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
+#include "musiclistwidget.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -25,10 +26,10 @@ class Ui_MainWidget
 {
 public:
     QStackedWidget *stackedWidget;
-    QWidget *page;
-    QPushButton *pushButton;
+    QWidget *page_1;
     QWidget *page_2;
-    QPushButton *pushButton_2;
+    MusicListWidget *localMusicWidget;
+    QPushButton *pushButton;
     QWidget *page_3;
     QPushButton *pushButton_3;
     QWidget *widget;
@@ -53,18 +54,18 @@ public:
         MainWidget->resize(690, 483);
         stackedWidget = new QStackedWidget(MainWidget);
         stackedWidget->setObjectName(QString::fromUtf8("stackedWidget"));
-        stackedWidget->setGeometry(QRect(309, 90, 161, 131));
-        page = new QWidget();
-        page->setObjectName(QString::fromUtf8("page"));
-        pushButton = new QPushButton(page);
-        pushButton->setObjectName(QString::fromUtf8("pushButton"));
-        pushButton->setGeometry(QRect(20, 60, 75, 23));
-        stackedWidget->addWidget(page);
+        stackedWidget->setGeometry(QRect(150, 30, 371, 251));
+        page_1 = new QWidget();
+        page_1->setObjectName(QString::fromUtf8("page_1"));
+        stackedWidget->addWidget(page_1);
         page_2 = new QWidget();
         page_2->setObjectName(QString::fromUtf8("page_2"));
-        pushButton_2 = new QPushButton(page_2);
-        pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
-        pushButton_2->setGeometry(QRect(30, 70, 75, 23));
+        localMusicWidget = new MusicListWidget(page_2);
+        localMusicWidget->setObjectName(QString::fromUtf8("localMusicWidget"));
+        localMusicWidget->setGeometry(QRect(30, 70, 241, 151));
+        pushButton = new QPushButton(page_2);
+        pushButton->setObjectName(QString::fromUtf8("pushButton"));
+        pushButton->setGeometry(QRect(10, 10, 75, 23));
         stackedWidget->addWidget(page_2);
         page_3 = new QWidget();
         page_3->setObjectName(QString::fromUtf8("page_3"));
@@ -74,7 +75,7 @@ public:
         stackedWidget->addWidget(page_3);
         widget = new QWidget(MainWidget);
         widget->setObjectName(QString::fromUtf8("widget"));
-        widget->setGeometry(QRect(40, 120, 93, 99));
+        widget->setGeometry(QRect(40, 50, 93, 99));
         verticalLayout = new QVBoxLayout(widget);
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         btnCurMusic = new QPushButton(widget);
@@ -94,11 +95,11 @@ public:
 
         positionSlider = new QSlider(MainWidget);
         positionSlider->setObjectName(QString::fromUtf8("positionSlider"));
-        positionSlider->setGeometry(QRect(140, 270, 271, 31));
+        positionSlider->setGeometry(QRect(130, 340, 271, 31));
         positionSlider->setOrientation(Qt::Horizontal);
         horizontalLayoutWidget = new QWidget(MainWidget);
         horizontalLayoutWidget->setObjectName(QString::fromUtf8("horizontalLayoutWidget"));
-        horizontalLayoutWidget->setGeometry(QRect(140, 330, 271, 51));
+        horizontalLayoutWidget->setGeometry(QRect(130, 400, 271, 51));
         horizontalLayout = new QHBoxLayout(horizontalLayoutWidget);
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
         horizontalLayout->setContentsMargins(0, 0, 0, 0);
@@ -127,11 +128,11 @@ public:
 
         btnAdd = new QPushButton(MainWidget);
         btnAdd->setObjectName(QString::fromUtf8("btnAdd"));
-        btnAdd->setGeometry(QRect(500, 350, 75, 23));
+        btnAdd->setGeometry(QRect(460, 420, 75, 23));
 
         retranslateUi(MainWidget);
 
-        stackedWidget->setCurrentIndex(2);
+        stackedWidget->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(MainWidget);
@@ -140,8 +141,7 @@ public:
     void retranslateUi(QWidget *MainWidget)
     {
         MainWidget->setWindowTitle(QCoreApplication::translate("MainWidget", "Form", nullptr));
-        pushButton->setText(QCoreApplication::translate("MainWidget", "test1", nullptr));
-        pushButton_2->setText(QCoreApplication::translate("MainWidget", "test2", nullptr));
+        pushButton->setText(QCoreApplication::translate("MainWidget", "xxxx", nullptr));
         pushButton_3->setText(QCoreApplication::translate("MainWidget", "test3", nullptr));
         btnCurMusic->setText(QCoreApplication::translate("MainWidget", "\345\275\223\345\211\215\346\222\255\346\224\276", nullptr));
         btnLocalMusic->setText(QCoreApplication::translate("MainWidget", "\346\234\254\345\234\260\351\237\263\344\271\220", nullptr));

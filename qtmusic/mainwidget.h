@@ -27,6 +27,13 @@ private:
     //初始化一些成员变量以及connect连接
     void init_play();
 
+    //数据库初始化
+    void init_sqlite();
+    //配置初始化（配置文件读取）
+    void init_settings();
+    //“本地音乐”、“我喜欢”等歌单的初始化
+    void init_musicList();
+
 private slots:
     void on_btnCurMusic_clicked();
 

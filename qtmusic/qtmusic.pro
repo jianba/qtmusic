@@ -11,10 +11,17 @@ TARGET = qtmusic
 
 SOURCES += \
     main.cpp \
-    mainwidget.cpp
+    mainwidget.cpp \
+    music.cpp \
+    musiclist.cpp \
+    musiclistwidget.cpp
 
 HEADERS += \
-    mainwidget.h
+    mainwidget.h \
+    music.h \
+    musiclist.h \
+    musiclistdialog.h \
+    musiclistwidget.h
 
 FORMS += \
     mainwidget.ui
