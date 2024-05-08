@@ -6,12 +6,13 @@
 
 
 #include<QListWidget>
+#include "musiclist.h"
 
 class MusicListWidget:public QListWidget
 {
 //    Q_OBJECT
-////    //当前歌曲列表（存储的是歌曲信息）
-////    MusicList musicList;
+    //当前歌曲列表（存储的是歌曲信息）
+    MusicList musicList;
 //    //当前展示列表项使用的图标
     QIcon icon=QIcon(":/image/image/image/music.png");
 

@@ -19,7 +19,7 @@
      <x>150</x>
      <y>30</y>
      <width>371</width>
-     <height>251</height>
+     <height>261</height>
     </rect>
    </property>
    <property name="currentIndex">
@@ -103,8 +103,8 @@
   <widget class="QSlider" name="positionSlider">
    <property name="geometry">
     <rect>
-     <x>130</x>
-     <y>340</y>
+     <x>140</x>
+     <y>330</y>
      <width>271</width>
      <height>31</height>
     </rect>

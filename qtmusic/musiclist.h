@@ -1,6 +1,6 @@
 #ifndef MUSICLIST_H
 #define MUSICLIST_H
-#include<vector>
+#include <vector>
 #include "music.h"
 #include <QMediaPlaylist>
 #include <QListWidget>

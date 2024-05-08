@@ -4,6 +4,11 @@
 #include <QWidget>
 #include <QMediaPlayer>
 #include <QMediaPlaylist>
+#include <QMenu>
+#include <QSystemTrayIcon>
+
+#include "musiclist.h"
+#include "music.h"
 
 namespace Ui {
 class MainWidget;
@@ -17,6 +22,7 @@ public:
     explicit MainWidget(QWidget *parent = nullptr);
     ~MainWidget();
 
+//     vector<MusicList> musiclist;
 private:
     Ui::MainWidget *ui;
 
@@ -33,6 +39,15 @@ private:
     void init_settings();
     //“本地音乐”、“我喜欢”等歌单的初始化
     void init_musicList();
+
+    //歌单
+    vector<MusicList> musiclist;
+    //用于标识现在展示的是哪个歌单
+    int musiclist_index=-1;
+    //更新展示歌单名字的listwidget
+    void namelist_refresh();
+    //用于更新展示歌单内容的listwidget
+    void musicListWidget_refresh();
 
 private slots:
     void on_btnCurMusic_clicked();

@@ -1,9 +1,14 @@
 #include "mainwidget.h"
 #include "ui_mainwidget.h"
+#include "musiclistdialog.h"
+#include "musiclist.h"
+#include "music.h"
+
 #include <QFileDialog>
 #include <QStandardPaths>
 #include <QtSql>
 #include <QMessageBox>
+#include <QDebug>
 
 MainWidget::MainWidget(QWidget *parent) :
     QWidget(parent),
@@ -13,6 +18,7 @@ MainWidget::MainWidget(QWidget *parent) :
 
     //数据库初始化
     init_sqlite();
+    init_musicList();
 }
 
 MainWidget::~MainWidget()
@@ -71,6 +77,73 @@ void MainWidget::init_sqlite()
     }
 }
 
+void MainWidget::init_musicList()
+{
+    //本地音乐 初始化
+    ui->localMusicWidget->musicList.setName("LocalMusic");
+    ui->localMusicWidget->musicList.read_fromSQL();
+    ui->localMusicWidget->refresh();
+    //我喜欢 初始化
+//    ui->favorMusicWidget->musicList.setName("FavorMusic");
+//    ui->favorMusicWidget->musicList.read_fromSQL();
+//    ui->favorMusicWidget->refresh();
+
+    //从数据库中恢复歌单
+    QSqlQuery sql_query;
+    QString select_sql = "select name from MusicLists";
+    sql_query.prepare(select_sql);
+    if(sql_query.exec())
+    {
+        while(sql_query.next())
+        {
+            QString musicListName=sql_query.value(0).toString();
+            MusicList tempList;
+            tempList.setName(musicListName);
+            tempList.read_fromSQL();
+            musiclist.push_back(tempList);
+
+            qDebug() << "sql_query.next()";
+        }
+    }
+//    namelist_refresh();
+}
+
+
+QString formatTime(qint64 timeMilliSeconds)
+{
+    qint64 seconds = timeMilliSeconds / 1000;
+    const qint64 minutes = seconds / 60;
+    seconds -= minutes * 60;
+    return QStringLiteral("%1:%2")
+        .arg(minutes, 2, 10, QLatin1Char('0'))
+        .arg(seconds, 2, 10, QLatin1Char('0'));
+}
+
+
+//void MainWidget::namelist_refresh()
+//{
+//    //先清空
+//    QSqlQuery sql_query;
+//    QString delete_sql = "delete from MusicLists";
+//    sql_query.prepare(delete_sql);
+//    sql_query.exec();
+//    for(size_t i=0;i<musiclist.size();i++){
+//        QSqlQuery sql_query2;
+//        QString insert_sql = "insert into MusicLists values (?)";
+//        sql_query2.prepare(insert_sql);
+//        sql_query2.addBindValue(musiclist[i].getName());
+//        sql_query2.exec();
+//    }
+//    //展示列表刷新 -- 歌单
+////    ui->nameListWidget->clear();
+////    for(size_t i=0;i<musiclist.size();i++){
+////        QListWidgetItem *item = new QListWidgetItem;
+////        item->setIcon(QIcon(":/image/image/image/music_list.png"));
+////        item->setText(musiclist[i].getName());
+////        ui->nameListWidget->addItem(item);
+////    }
+//}
+
 
 /*一些点击事件的响应（使用.ui中的部件“转到槽”自动生成）*/
 void MainWidget::on_btnCurMusic_clicked()
@@ -123,14 +196,20 @@ void MainWidget::on_btnAdd_clicked()
     fileDialog.setAcceptMode(QFileDialog::AcceptOpen);
     fileDialog.setFileMode(QFileDialog::ExistingFiles);
     fileDialog.setWindowTitle(tr("添加本地音乐（注：自动过滤，按下\"Ctrl+A\"全选添加即可；不支持添加文件夹）"));
-    QStringList list;list<<"application/octet-stream";
+
+    QStringList list;
+    list<<"application/octet-stream";
     fileDialog.setMimeTypeFilters(list);
     fileDialog.setDirectory(QStandardPaths::standardLocations(QStandardPaths::MusicLocation).value(0, QDir::homePath()));
     if (fileDialog.exec() == QDialog::Accepted){
        QList<QUrl> urls=fileDialog.selectedUrls();
-//       ui->localMusicWidget->musicList.addMusic(urls);
-//       ui->localMusicWidget->refresh();
+       ui->localMusicWidget->musicList.addMusic(urls);
+       ui->localMusicWidget->refresh();
+        qDebug() << "ui->localMusicWidget->refresh() ";
        ui->stackedWidget->setCurrentIndex(1);//切换到本地音乐
     }
+
+
+    qDebug() << "111111 ";
 }
 
