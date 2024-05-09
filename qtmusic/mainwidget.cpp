@@ -16,6 +16,8 @@ MainWidget::MainWidget(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    init_play();
+
     //数据库初始化
     init_sqlite();
     init_musicList();
@@ -28,10 +30,17 @@ MainWidget::~MainWidget()
 
 void MainWidget::init_play()
 {
-    player = new QMediaPlayer(this);
-    playlist = new QMediaPlaylist;
+    //播放器初始化
+    player= new QMediaPlayer(this);
+    playlist=new QMediaPlaylist;
     playlist->setPlaybackMode(QMediaPlaylist::Loop);
     player->setPlaylist(playlist);
+    //连接槽与信号
+//    connect(ui->positionSlider, &QAbstractSlider::valueChanged, this, &MainWidget::setPosition);
+//    connect(player, &QMediaPlayer::positionChanged, this, &MainWidget::updatePosition);
+//    connect(player, &QMediaPlayer::durationChanged, this, &MainWidget::updateDuration);
+//    connect(player, &QMediaPlayer::metaDataAvailableChanged, this, &MainWidget::updateInfo);
+//    connect(player, &QMediaPlayer::stateChanged, this, &MainWidget::updatePlayBtn);
 }
 
 void MainWidget::init_sqlite()
@@ -213,3 +222,25 @@ void MainWidget::on_btnAdd_clicked()
     qDebug() << "111111 ";
 }
 
+
+//void MainWidget::on_localMusicWidget_itemDoubleClicked(QListWidgetItem *item)
+//{
+
+//}
+
+void MainWidget::on_localMusicWidget_doubleClicked(const QModelIndex &index)
+{
+    qDebug() << "00-on_localMusicWidget_doubleClicked";
+    playlist->clear();
+
+    qDebug() << "11-on_localMusicWidget_doubleClicked";
+    ui->localMusicWidget->musicList.addToPlayList(playlist);
+//    ui->playListWidget->setMusicList_playing(ui->localMusicWidget->musicList);
+//    musicList = ui->localMusicWidget->musicList;
+
+    int i=index.row();
+    qDebug() << "22-on_localMusicWidget_doubleClicked";
+    playlist->setCurrentIndex(i);
+    player->play();
+    ui->stackedWidget->setCurrentIndex(0);//跳转到当前播放列表
+}

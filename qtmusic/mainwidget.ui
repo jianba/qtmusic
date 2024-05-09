@@ -27,16 +27,6 @@
    </property>
    <widget class="QWidget" name="page_1"/>
    <widget class="QWidget" name="page_2">
-    <widget class="MusicListWidget" name="localMusicWidget" native="true">
-     <property name="geometry">
-      <rect>
-       <x>30</x>
-       <y>70</y>
-       <width>241</width>
-       <height>151</height>
-      </rect>
-     </property>
-    </widget>
     <widget class="QPushButton" name="pushButton">
      <property name="geometry">
       <rect>
@@ -48,6 +38,16 @@
      </property>
      <property name="text">
       <string>xxxx</string>
+     </property>
+    </widget>
+    <widget class="MusicListWidget" name="localMusicWidget">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>60</y>
+       <width>251</width>
+       <height>191</height>
+      </rect>
      </property>
     </widget>
    </widget>
@@ -189,9 +189,8 @@
  <customwidgets>
   <customwidget>
    <class>MusicListWidget</class>
-   <extends>QWidget</extends>
+   <extends>QListWidget</extends>
    <header>musiclistwidget.h</header>
-   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources/>
