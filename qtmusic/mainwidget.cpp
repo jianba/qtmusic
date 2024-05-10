@@ -238,6 +238,7 @@ void MainWidget::on_localMusicWidget_doubleClicked(const QModelIndex &index)
 //    ui->playListWidget->setMusicList_playing(ui->localMusicWidget->musicList);
 //    musicList = ui->localMusicWidget->musicList;
 
+    qDebug() << "mediaCount = " << playlist->mediaCount();
     int i=index.row();
     qDebug() << "22-on_localMusicWidget_doubleClicked";
     playlist->setCurrentIndex(i);
