@@ -10,6 +10,7 @@ QT += widgets
 TARGET = qtmusic
 
 SOURCES += \
+    lyricwidget.cpp \
     main.cpp \
     mainwidget.cpp \
     music.cpp \
@@ -17,6 +18,7 @@ SOURCES += \
     musiclistwidget.cpp
 
 HEADERS += \
+    lyricwidget.h \
     mainwidget.h \
     music.h \
     musiclist.h \
@@ -24,6 +26,7 @@ HEADERS += \
     musiclistwidget.h
 
 FORMS += \
+    lyricwidget.ui \
     mainwidget.ui
 
 RESOURCES += \

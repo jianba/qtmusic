@@ -62,6 +62,7 @@ private slots:
     void on_btnAdd_clicked();
 //    void on_localMusicWidget_itemDoubleClicked(QListWidgetItem *item);
     void on_localMusicWidget_doubleClicked(const QModelIndex &index);
+    void on_btnLyric_clicked();
 };
 
 #endif // MAINWIDGET_H

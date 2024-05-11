@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>690</width>
-    <height>483</height>
+    <width>915</width>
+    <height>616</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,14 +16,17 @@
   <widget class="QStackedWidget" name="stackedWidget">
    <property name="geometry">
     <rect>
-     <x>150</x>
-     <y>30</y>
-     <width>371</width>
-     <height>261</height>
+     <x>170</x>
+     <y>20</y>
+     <width>681</width>
+     <height>431</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">#stackedWidget{border:3px solid red}</string>
+   </property>
    <property name="currentIndex">
-    <number>0</number>
+    <number>3</number>
    </property>
    <widget class="QWidget" name="page_1">
     <widget class="QPushButton" name="pushButton_2">
@@ -80,7 +83,91 @@
      </property>
     </widget>
    </widget>
-   <widget class="QWidget" name="page_4"/>
+   <widget class="QWidget" name="page_4">
+    <widget class="QLabel" name="musicAlbumLabel">
+     <property name="geometry">
+      <rect>
+       <x>220</x>
+       <y>30</y>
+       <width>121</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::Box</enum>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="scaledContents">
+      <bool>false</bool>
+     </property>
+     <property name="wordWrap">
+      <bool>false</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="musicAuthorLabel">
+     <property name="geometry">
+      <rect>
+       <x>220</x>
+       <y>60</y>
+       <width>121</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::Box</enum>
+     </property>
+     <property name="midLineWidth">
+      <number>1</number>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="musicTitleLabel">
+     <property name="geometry">
+      <rect>
+       <x>220</x>
+       <y>90</y>
+       <width>121</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::Box</enum>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="LyricWidget" name="lyricWidget" native="true">
+     <property name="geometry">
+      <rect>
+       <x>70</x>
+       <y>140</y>
+       <width>561</width>
+       <height>251</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">#lyricWidget{border:3px solid red}</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="pushButton_4">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>20</y>
+       <width>75</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>4</string>
+     </property>
+    </widget>
+   </widget>
   </widget>
   <widget class="QWidget" name="widget" native="true">
    <property name="geometry">
@@ -118,8 +205,8 @@
   <widget class="QSlider" name="positionSlider">
    <property name="geometry">
     <rect>
-     <x>140</x>
-     <y>330</y>
+     <x>120</x>
+     <y>490</y>
      <width>271</width>
      <height>31</height>
     </rect>
@@ -131,8 +218,8 @@
   <widget class="QWidget" name="horizontalLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>130</x>
-     <y>400</y>
+     <x>120</x>
+     <y>540</y>
      <width>271</width>
      <height>51</height>
     </rect>
@@ -190,8 +277,8 @@
   <widget class="QPushButton" name="btnAdd">
    <property name="geometry">
     <rect>
-     <x>460</x>
-     <y>420</y>
+     <x>450</x>
+     <y>560</y>
      <width>75</width>
      <height>23</height>
     </rect>
@@ -200,12 +287,31 @@
     <string>PushButton</string>
    </property>
   </widget>
+  <widget class="QPushButton" name="btnLyric">
+   <property name="geometry">
+    <rect>
+     <x>620</x>
+     <y>560</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>词</string>
+   </property>
+  </widget>
  </widget>
  <customwidgets>
   <customwidget>
    <class>MusicListWidget</class>
    <extends>QListWidget</extends>
    <header>musiclistwidget.h</header>
+  </customwidget>
+  <customwidget>
+   <class>LyricWidget</class>
+   <extends>QWidget</extends>
+   <header location="global">lyricwidget.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources/>

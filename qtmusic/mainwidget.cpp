@@ -245,3 +245,9 @@ void MainWidget::on_localMusicWidget_doubleClicked(const QModelIndex &index)
     player->play();
     ui->stackedWidget->setCurrentIndex(0);//跳转到当前播放列表
 }
+
+void MainWidget::on_btnLyric_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(3);
+    qDebug() << "MainWidget::on_btnLyric_clicked";
+}
