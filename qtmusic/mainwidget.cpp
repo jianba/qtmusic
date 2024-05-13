@@ -20,6 +20,7 @@ MainWidget::MainWidget(QWidget *parent) :
 
     //数据库初始化
     init_sqlite();
+
     init_musicList();
 }
 
@@ -39,7 +40,8 @@ void MainWidget::init_play()
 //    connect(ui->positionSlider, &QAbstractSlider::valueChanged, this, &MainWidget::setPosition);
 //    connect(player, &QMediaPlayer::positionChanged, this, &MainWidget::updatePosition);
 //    connect(player, &QMediaPlayer::durationChanged, this, &MainWidget::updateDuration);
-//    connect(player, &QMediaPlayer::metaDataAvailableChanged, this, &MainWidget::updateInfo);
+    // 更新歌词，程序 core
+    connect(player, &QMediaPlayer::metaDataAvailableChanged, this, &MainWidget::updateInfo);
 //    connect(player, &QMediaPlayer::stateChanged, this, &MainWidget::updatePlayBtn);
 }
 
@@ -154,6 +156,48 @@ QString formatTime(qint64 timeMilliSeconds)
 //}
 
 
+void MainWidget::updateInfo()
+{
+    if (player->isMetaDataAvailable()) {
+        //返回可用MP3元数据列表（调试时可以查看）
+        QStringList listInfo_debug=player->availableMetaData();
+        //歌曲信息
+        QString info="";
+        QString author = player->metaData(QStringLiteral("Author")).toStringList().join(",");
+        info.append(author);
+        QString title = player->metaData(QStringLiteral("Title")).toString();
+        QString albumTitle = player->metaData(QStringLiteral("AlbumTitle")).toString();
+        info.append(" - "+title);
+        info.append(" ["+formatTime(player->duration())+"]");
+//        ui->infoLabel->setText(info);
+//        mySystemTray->setToolTip("正在播放："+info);
+        //封面图片（应获取"ThumbnailImage" From: https://www.zhihu.com/question/36859497）
+        QImage picImage= player->metaData(QStringLiteral("ThumbnailImage")).value<QImage>();
+        if(picImage.isNull()) picImage=QImage(":/image/image/image/non-music.png");
+//        ui->coverLabel->setPixmap(QPixmap::fromImage(picImage));
+//        ui->coverLabel->setScaledContents(true);
+        //改变正在播放歌曲的图标
+//        for(int i=0;i<playlist->mediaCount();i++){
+//            QListWidgetItem *p=ui->playListWidget->item(i);
+//            p->setIcon(ui->playListWidget->getIcon());
+//        }
+        int index=playlist->currentIndex();
+//        QListWidgetItem *p =ui->playListWidget->item(index);
+//        p->setIcon(QIcon(":/image/image/image/music-playing.png"));
+
+        //歌词界面显示的信息
+        ui->musicTitleLabel->setText(title);
+        ui->musicAlbumLabel->setText(u8"专辑："+albumTitle);
+        ui->musicAuthorLabel->setText(u8"歌手："+author);
+
+        qDebug() << "geci 000";
+        //解析歌词
+        ui->lyricWidget->process(ui->playListWidget->musicList.music[index].getLyricFile());
+        qDebug() << "geci 111";
+    }
+}
+
+
 /*一些点击事件的响应（使用.ui中的部件“转到槽”自动生成）*/
 void MainWidget::on_btnCurMusic_clicked()
 {
@@ -198,7 +242,6 @@ void MainWidget::on_btnNext_clicked()
     playlist->next();
 }
 
-// 目前无响应
 void MainWidget::on_btnAdd_clicked()
 {
     QFileDialog fileDialog(this);

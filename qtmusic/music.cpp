@@ -46,6 +46,15 @@ void Music::insertSQL(const QString &name)
     sql_query.exec();
 }
 
+QString Music::getLyricFile()
+{
+    QString mp3FilePath=url.toLocalFile();
+    mp3FilePath.replace(".mp3",".lrc");
+    mp3FilePath.replace(".flac",".lrc");
+    mp3FilePath.replace(".mpga",".lrc");
+    return mp3FilePath;
+}
+
 QString Music::getInfo() const
 {
 //    return author+" - "+title+" ["+formatTime(duration)+"]";

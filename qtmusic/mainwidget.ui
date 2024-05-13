@@ -26,7 +26,7 @@
     <string notr="true">#stackedWidget{border:3px solid red}</string>
    </property>
    <property name="currentIndex">
-    <number>3</number>
+    <number>0</number>
    </property>
    <widget class="QWidget" name="page_1">
     <widget class="QPushButton" name="pushButton_2">
@@ -40,6 +40,16 @@
      </property>
      <property name="text">
       <string>bt1</string>
+     </property>
+    </widget>
+    <widget class="MusicListWidget" name="playListWidget">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>90</y>
+       <width>541</width>
+       <height>301</height>
+      </rect>
      </property>
     </widget>
    </widget>
@@ -62,8 +72,8 @@
       <rect>
        <x>20</x>
        <y>60</y>
-       <width>251</width>
-       <height>191</height>
+       <width>621</width>
+       <height>341</height>
       </rect>
      </property>
     </widget>
@@ -305,12 +315,12 @@
   <customwidget>
    <class>MusicListWidget</class>
    <extends>QListWidget</extends>
-   <header>musiclistwidget.h</header>
+   <header location="global">musiclistwidget.h</header>
   </customwidget>
   <customwidget>
    <class>LyricWidget</class>
    <extends>QWidget</extends>
-   <header location="global">lyricwidget.h</header>
+   <header>lyricwidget.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
