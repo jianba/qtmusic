@@ -22,7 +22,6 @@ public:
     explicit MainWidget(QWidget *parent = nullptr);
     ~MainWidget();
 
-//     vector<MusicList> musiclist;
 private:
     Ui::MainWidget *ui;
 

@@ -37,12 +37,11 @@ void MainWidget::init_play()
     playlist->setPlaybackMode(QMediaPlaylist::Loop);
     player->setPlaylist(playlist);
     //连接槽与信号
-//    connect(ui->positionSlider, &QAbstractSlider::valueChanged, this, &MainWidget::setPosition);
+    connect(ui->positionSlider, &QAbstractSlider::valueChanged, this, &MainWidget::setPosition);
     connect(player, &QMediaPlayer::positionChanged, this, &MainWidget::updatePosition);
-//    connect(player, &QMediaPlayer::durationChanged, this, &MainWidget::updateDuration);
-    // 更新歌词，程序 core
+    connect(player, &QMediaPlayer::durationChanged, this, &MainWidget::updateDuration);
     connect(player, &QMediaPlayer::metaDataAvailableChanged, this, &MainWidget::updateInfo);
-//    connect(player, &QMediaPlayer::stateChanged, this, &MainWidget::updatePlayBtn);
+    connect(player, &QMediaPlayer::stateChanged, this, &MainWidget::updatePlayBtn);
 }
 
 void MainWidget::init_sqlite()
@@ -162,6 +161,32 @@ void MainWidget::updatePosition(qint64 position)
     if(playlist->currentIndex()>=0)ui->lyricWidget->show(position);
 }
 
+void MainWidget::updateDuration(qint64 duration)
+{
+    ui->positionSlider->setRange(0, static_cast<int>(duration));
+    ui->positionSlider->setEnabled(static_cast<int>(duration) > 0);
+    if(!(static_cast<int>(duration) > 0)) {
+        //无音乐播放时，界面元素
+//        ui->infoLabel->setText("KEEP CALM AND CARRY ON ...");
+//        mySystemTray->setToolTip(u8"LightMusicPlayer · By NJU-TJL");
+        QImage image(":/image/image/image/non-music.png");
+//        ui->coverLabel->setPixmap(QPixmap::fromImage(image));
+        ui->musicTitleLabel->setText("");
+        ui->musicAlbumLabel->setText("");
+        ui->musicAuthorLabel->setText("");
+        ui->lyricWidget->clear();
+    }
+    ui->positionSlider->setPageStep(static_cast<int>(duration) / 10);
+}
+
+void MainWidget::setPosition(int position)
+{
+    // avoid seeking when the slider value change is triggered from updatePosition()
+    if (qAbs(player->position() - position) > 99)
+        player->setPosition(position);
+}
+
+
 void MainWidget::updateInfo()
 {
     if (player->isMetaDataAvailable()) {
@@ -202,6 +227,21 @@ void MainWidget::updateInfo()
         qDebug() << "geci 111";
     }
 }
+
+void MainWidget::updatePlayBtn()
+{
+    if(player->state()==QMediaPlayer::PlayingState)
+    {
+//        ui->btnPlay->setStyleSheet(PlayStyle());
+//        action_systemTray_play->setIcon(QIcon(":/image/image/image/pause2.png"));
+//        action_systemTray_play->setText(u8"暂停");
+    }else{
+//        ui->btnPlay->setStyleSheet(PaseStyle());
+//        action_systemTray_play->setIcon(QIcon(":/image/image/image/play2.png"));
+//        action_systemTray_play->setText(u8"播放");
+    }
+}
+
 
 
 /*一些点击事件的响应（使用.ui中的部件“转到槽”自动生成）*/
@@ -279,17 +319,24 @@ void MainWidget::on_btnAdd_clicked()
 
 void MainWidget::on_localMusicWidget_doubleClicked(const QModelIndex &index)
 {
-    qDebug() << "00-on_localMusicWidget_doubleClicked";
-    playlist->clear();
+//    qDebug() << "00-on_localMusicWidget_doubleClicked";
+//    playlist->clear();
 
-    qDebug() << "11-on_localMusicWidget_doubleClicked";
-    ui->localMusicWidget->musicList.addToPlayList(playlist);
+//    qDebug() << "11-on_localMusicWidget_doubleClicked";
+//    ui->localMusicWidget->musicList.addToPlayList(playlist);
 //    ui->playListWidget->setMusicList_playing(ui->localMusicWidget->musicList);
 //    musicList = ui->localMusicWidget->musicList;
 
-    qDebug() << "mediaCount = " << playlist->mediaCount();
+//    qDebug() << "mediaCount = " << playlist->mediaCount();
+//    int i=index.row();
+//    qDebug() << "22-on_localMusicWidget_doubleClicked";
+//    playlist->setCurrentIndex(i);
+//    player->play();
+//    ui->stackedWidget->setCurrentIndex(0);//跳转到当前播放列表
+    playlist->clear();
+    ui->localMusicWidget->musicList.addToPlayList(playlist);
+    ui->playListWidget->setMusicList_playing(ui->localMusicWidget->musicList);
     int i=index.row();
-    qDebug() << "22-on_localMusicWidget_doubleClicked";
     playlist->setCurrentIndex(i);
     player->play();
     ui->stackedWidget->setCurrentIndex(0);//跳转到当前播放列表

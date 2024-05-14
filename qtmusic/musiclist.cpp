@@ -114,6 +114,19 @@ void MusicList::removeMusic(int pos)
 //    }
 }
 
+void MusicList::showInExplorer(int pos)
+{
+    QString str=music[pos].getUrl().toString();
+    str.remove(str.split("/").last());//切割字符串获得所在的文件夹路径
+    QDesktopServices::openUrl(str);
+}
+
+void MusicList::detail(int pos)
+{
+//    pos;
+    music[pos].detail();
+}
+
 void MusicList::read_fromSQL()
 {
     QSqlQuery sql_query;

@@ -46,21 +46,25 @@ void Music::insertSQL(const QString &name)
     sql_query.addBindValue(albumTitle);
     sql_query.addBindValue(audioBitRate);
     sql_query.exec();
+    // 数据库中存储的数据
+    qDebug() << "999 insertSQL() "<< url.toString();
 }
 
 QString Music::getLyricFile()
 {
-//    QString mp3FilePath = "E:/QT/Taylor Swift-I Knew You Were Trouble.mp3";
-    qDebug() << "999 Music::getLyricFile()";
+////    QString mp3FilePath = "E:/QT/Taylor Swift-I Knew You Were Trouble.mp3";
+//    qDebug() << "999 Music::getLyricFile()";
 //    if(url.isValid())
 //    {
 //        qDebug() << "999 url.isValid()";
 //    }
-////    QString mp3FilePath=url.toLocalFile();
-//    mp3FilePath.replace(".mp3",".lrc");
-//    mp3FilePath.replace(".flac",".lrc");
-//    mp3FilePath.replace(".mpga",".lrc");
-    QString mp3FilePath = "E:/QT/Taylor Swift-I Knew You Were Trouble.lrc";
+
+//    QString mp3FilePath = "E:/QT/Taylor Swift-I Knew You Were Trouble.lrc";
+
+    QString mp3FilePath=url.toLocalFile();
+    mp3FilePath.replace(".mp3",".lrc");
+    mp3FilePath.replace(".flac",".lrc");
+    mp3FilePath.replace(".mpga",".lrc");
     return mp3FilePath;
 }
 
@@ -68,4 +72,12 @@ QString Music::getInfo() const
 {
 //    return author+" - "+title+" ["+formatTime(duration)+"]";
     return author+" - "+title;
+}
+
+void Music::detail()
+{
+    QString info("歌曲名：%1\n艺术家：%2\n时长：%3\n唱片集：%4\n比特率：%5\n文件路径：%6");
+//    info=info.arg(title,author,formatTime(duration),albumTitle,QString::number(audioBitRate)+"bps",url.toString());
+    info=info.arg(title,author,"233",albumTitle,QString::number(audioBitRate)+"bps",url.toString());
+    QMessageBox::about(Q_NULLPTR,"歌曲信息",info);
 }
