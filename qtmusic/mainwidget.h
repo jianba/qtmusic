@@ -32,8 +32,12 @@ private:
     QMediaPlaylist *playlist;
     //初始化一些成员变量以及connect连接
     void init_play();
+    //更新播放信息相关（进度、信息等）
+    void updatePosition(qint64 position);
+    void updateDuration(qint64 duration);
+    void setPosition(int position);
     void updateInfo();
-
+    void updatePlayBtn();
 
     //数据库初始化
     void init_sqlite();

@@ -38,7 +38,7 @@ void MainWidget::init_play()
     player->setPlaylist(playlist);
     //连接槽与信号
 //    connect(ui->positionSlider, &QAbstractSlider::valueChanged, this, &MainWidget::setPosition);
-//    connect(player, &QMediaPlayer::positionChanged, this, &MainWidget::updatePosition);
+    connect(player, &QMediaPlayer::positionChanged, this, &MainWidget::updatePosition);
 //    connect(player, &QMediaPlayer::durationChanged, this, &MainWidget::updateDuration);
     // 更新歌词，程序 core
     connect(player, &QMediaPlayer::metaDataAvailableChanged, this, &MainWidget::updateInfo);
@@ -155,6 +155,12 @@ QString formatTime(qint64 timeMilliSeconds)
 ////    }
 //}
 
+void MainWidget::updatePosition(qint64 position)
+{
+    ui->positionSlider->setValue(static_cast<int>(position));
+//    ui->positionLabel->setText(formatTime(position)+"/"+formatTime(player->duration()));
+    if(playlist->currentIndex()>=0)ui->lyricWidget->show(position);
+}
 
 void MainWidget::updateInfo()
 {

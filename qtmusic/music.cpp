@@ -12,6 +12,8 @@ Music::Music(QUrl iurl)
 
 void Music::refreshInfo()
 {
+    qDebug() << "999 Music::refreshInfo()"<< url.toString();
+    qDebug() << "999 Music::refreshInfo()"<< url.toLocalFile();
     QMediaPlayer tempPlayer;
     tempPlayer.setMedia(url);
     //元数据的解析需要时间，所以这里需要循环等待（但同时需要保持Qt事件处理机制在运行）
@@ -48,10 +50,17 @@ void Music::insertSQL(const QString &name)
 
 QString Music::getLyricFile()
 {
-    QString mp3FilePath=url.toLocalFile();
-    mp3FilePath.replace(".mp3",".lrc");
-    mp3FilePath.replace(".flac",".lrc");
-    mp3FilePath.replace(".mpga",".lrc");
+//    QString mp3FilePath = "E:/QT/Taylor Swift-I Knew You Were Trouble.mp3";
+    qDebug() << "999 Music::getLyricFile()";
+//    if(url.isValid())
+//    {
+//        qDebug() << "999 url.isValid()";
+//    }
+////    QString mp3FilePath=url.toLocalFile();
+//    mp3FilePath.replace(".mp3",".lrc");
+//    mp3FilePath.replace(".flac",".lrc");
+//    mp3FilePath.replace(".mpga",".lrc");
+    QString mp3FilePath = "E:/QT/Taylor Swift-I Knew You Were Trouble.lrc";
     return mp3FilePath;
 }
 
