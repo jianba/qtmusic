@@ -13,7 +13,7 @@ MusicList::MusicList(const QList<QUrl> &urls, QString iname)
 {
 
     addMusic(urls);
-    iname;
+    setName(iname);
 }
 
 
@@ -82,37 +82,53 @@ void MusicList::addToListWidget(MusicListWidget *listWidget)
 
 void MusicList::removeMusic(int pos)
 {
-    pos;
-//    if(sql_flag){
-//        remove_SQL_all();
-//        int i=0;
-//        for(auto it=music.begin();it!=music.end();){
-//            if(i==pos){
-//                it= music.erase(it);
-//                break;
-//            }
-//            else{
-//                it++;
-//            }
-//            i++;
+    if(sql_flag){
+        remove_SQL_all();
+        int i=0;
+        for(auto it=music.begin();it!=music.end();){
+            if(i==pos){
+                it= music.erase(it);
+                break;
+            }
+            else{
+                it++;
+            }
+            i++;
 
-//        }
-//        insert_SQL_all();
-//    }else{
-//        int i=0;
-//        for(auto it=music.begin();it!=music.end();){
-//            if(i==pos){
-//                it= music.erase(it);
-//                break;
-//            }
-//            else{
-//                it++;
-//            }
-//            i++;
+        }
+        insert_SQL_all();
+    }else{
+        int i=0;
+        for(auto it=music.begin();it!=music.end();){
+            if(i==pos){
+                it= music.erase(it);
+                break;
+            }
+            else{
+                it++;
+            }
+            i++;
 
-//        }
-//    }
+        }
+    }
 }
+
+void MusicList::remove_SQL_all()
+{
+    QSqlQuery sql_query;
+    QString delete_sql = "delete from MusicInfo where name = ?";
+    sql_query.prepare(delete_sql);
+    sql_query.addBindValue(name);
+    sql_query.exec();
+}
+
+void MusicList::insert_SQL_all()
+{
+    for(auto i=music.begin();i!=music.end();i++){
+        i->insertSQL(name);
+    }
+}
+
 
 void MusicList::showInExplorer(int pos)
 {

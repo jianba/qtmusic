@@ -308,7 +308,7 @@ void MainWidget::on_btnAdd_clicked()
     }
 
 
-    qDebug() << "111111 ";
+    qDebug() << "111 MainWidget::on_btnAdd_clicked()";
 }
 
 
@@ -327,7 +327,7 @@ void MainWidget::on_localMusicWidget_doubleClicked(const QModelIndex &index)
 //    ui->playListWidget->setMusicList_playing(ui->localMusicWidget->musicList);
 //    musicList = ui->localMusicWidget->musicList;
 
-//    qDebug() << "mediaCount = " << playlist->mediaCount();
+//    qDebug() << "mediaCount = " << playlist->mediaCount();l
 //    int i=index.row();
 //    qDebug() << "22-on_localMusicWidget_doubleClicked";
 //    playlist->setCurrentIndex(i);
