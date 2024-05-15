@@ -3,10 +3,12 @@
 #include "musiclistdialog.h"
 #include "musiclist.h"
 #include "music.h"
+#include "myQSS.h"
 
 #include <QFileDialog>
 #include <QStandardPaths>
 #include <QtSql>
+#include <QPainter>
 #include <QMessageBox>
 #include <QDebug>
 
@@ -16,18 +18,60 @@ MainWidget::MainWidget(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    //UI初始化（.ui文件中无法完成的设置，这里补上）
+    init_UI();
+
+    //初始化生成播放器模块及相关组件
     init_play();
 
     //数据库初始化
     init_sqlite();
 
+    //歌单初始化
     init_musicList();
+
+    //配置初始化
+//    init_settings();
+
+    //系统托盘初始化
+//    init_systemTrayIcon();
 }
 
 MainWidget::~MainWidget()
 {
     delete ui;
 }
+
+void MainWidget::paintEvent(QPaintEvent *event)
+{
+    //需要添加以下代码，才能正常在主窗口Widget中显示背景图片（https://blog.csdn.net/xiejie0226/article/details/81165379）
+    QStyleOption opt;
+    opt.init(this);
+    QPainter p(this);
+    style()->drawPrimitive(QStyle::PE_Widget, &opt, &p, this);
+    QWidget::paintEvent(event);
+}
+
+void MainWidget::init_UI()
+{
+    //窗口设置圆角后，会出现留白，需要添加以下代码
+    setAttribute(Qt::WA_TranslucentBackground, true);
+    //去除标题栏
+    setWindowFlags(Qt::FramelessWindowHint);
+
+    //UI初始化（.ui文件中无法完成的设置，这里补上）
+//    ui->volumeSlider->hide();
+//    ui->playListWidget->verticalScrollBar()->setStyleSheet(ListWidgetStyle());
+//    ui->localMusicWidget->vlerticalScrollBar()->setStyleSheet(ListWidgetStyle());
+//    ui->favorMusicWidget->verticalScrollBar()->setStyleSheet(ListWidgetStyle());
+//    ui->nameListWidget->verticalScrollBar()->setStyleSheet(ListWidgetStyle());
+//    ui->musicListWidget->verticalScrollBar()->setStyleSheet(ListWidgetStyle());
+    ui->playListWidget->setIcon(QIcon(":/image/image/image/music.png"));
+    ui->localMusicWidget->setIcon(QIcon(":/image/image/image/music-file.png"));
+//    ui->favorMusicWidget->setIcon(QIcon(":/image/image/image/like.png"));
+//    ui->musicListWidget->setIcon(QIcon(":/image/image/image/MusicListItem.png"));
+}
+
 
 void MainWidget::init_play()
 {
@@ -346,4 +390,14 @@ void MainWidget::on_btnLyric_clicked()
 {
     ui->stackedWidget->setCurrentIndex(3);
     qDebug() << "MainWidget::on_btnLyric_clicked";
+}
+
+void MainWidget::on_btnQuit_clicked()
+{
+     close();
+}
+
+void MainWidget::on_btnMin_clicked()
+{
+    showMinimized();//窗口最小化
 }

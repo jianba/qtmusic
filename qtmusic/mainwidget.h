@@ -24,6 +24,10 @@ public:
 
 private:
     Ui::MainWidget *ui;
+    void paintEvent(QPaintEvent *event) override;
+
+    //UI组件额外的一些处理
+    void init_UI();
 
     //当前播放器
     QMediaPlayer *player;
@@ -67,6 +71,8 @@ private slots:
     void on_btnAdd_clicked();
     void on_localMusicWidget_doubleClicked(const QModelIndex &index);
     void on_btnLyric_clicked();
+    void on_btnQuit_clicked();
+    void on_btnMin_clicked();
 };
 
 #endif // MAINWIDGET_H

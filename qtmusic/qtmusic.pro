@@ -23,7 +23,8 @@ HEADERS += \
     music.h \
     musiclist.h \
     musiclistdialog.h \
-    musiclistwidget.h
+    musiclistwidget.h \
+    myQSS.h
 
 FORMS += \
     lyricwidget.ui \

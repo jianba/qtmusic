@@ -6,27 +6,37 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>915</width>
-    <height>616</height>
+    <width>1200</width>
+    <height>800</height>
    </rect>
+  </property>
+  <property name="acceptDrops">
+   <bool>true</bool>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget#MainWidget{
+border-radius:10px;
+border-image: url(:/image/image/background/default.jpg);
+}
+</string>
+  </property>
   <widget class="QStackedWidget" name="stackedWidget">
    <property name="geometry">
     <rect>
-     <x>170</x>
-     <y>20</y>
-     <width>681</width>
-     <height>431</height>
+     <x>220</x>
+     <y>80</y>
+     <width>811</width>
+     <height>451</height>
     </rect>
    </property>
    <property name="styleSheet">
     <string notr="true">#stackedWidget{border:3px solid red}</string>
    </property>
    <property name="currentIndex">
-    <number>3</number>
+    <number>1</number>
    </property>
    <widget class="QWidget" name="page_1">
     <widget class="QPushButton" name="pushButton_2">
@@ -71,7 +81,7 @@
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>60</y>
+       <y>40</y>
        <width>621</width>
        <height>341</height>
       </rect>
@@ -179,66 +189,77 @@
     </widget>
    </widget>
   </widget>
-  <widget class="QWidget" name="widget" native="true">
-   <property name="geometry">
-    <rect>
-     <x>40</x>
-     <y>50</y>
-     <width>93</width>
-     <height>99</height>
-    </rect>
-   </property>
-   <layout class="QVBoxLayout" name="verticalLayout">
-    <item>
-     <widget class="QPushButton" name="btnCurMusic">
-      <property name="text">
-       <string>当前播放</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QPushButton" name="btnLocalMusic">
-      <property name="text">
-       <string>本地音乐</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QPushButton" name="btnFavorMusic">
-      <property name="text">
-       <string>我喜欢</string>
-      </property>
-     </widget>
-    </item>
-   </layout>
-  </widget>
   <widget class="QSlider" name="positionSlider">
    <property name="geometry">
     <rect>
-     <x>120</x>
-     <y>490</y>
-     <width>271</width>
-     <height>31</height>
+     <x>400</x>
+     <y>660</y>
+     <width>521</width>
+     <height>21</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QSlider::add-page:Horizontal\n
+{     \nbackground-color: rgba(255, 255, 255,150);\n
+		height:4px;  \n
+}
+
+\nQSlider::sub-page:Horizontal   \n
+{  
+	\nbackground-color: rgb(255, 255, 255);\n
+	height:4px;\n
+}
+\nQSlider::groove:Horizontal   \n
+	{ 
+		\nbackground:transparent; 
+		\nheight:4px;\n
+	}  \n
+	QSlider::handle:Horizontal\n
+	{ 
+		\nheight:16px; 
+		\nwidth:16px; 
+		\nborder-image:url(:/image/image/image/sliderHandle.png);
+		\nmargin: -6 0px; \n
+	}\n      \n</string>
    </property>
    <property name="orientation">
     <enum>Qt::Horizontal</enum>
    </property>
   </widget>
-  <widget class="QWidget" name="horizontalLayoutWidget">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>120</x>
-     <y>540</y>
-     <width>271</width>
-     <height>51</height>
+     <x>400</x>
+     <y>710</y>
+     <width>221</width>
+     <height>81</height>
     </rect>
    </property>
    <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
      <widget class="QPushButton" name="btnPre">
+      <property name="styleSheet">
+       <string notr="true">QPushButton
+{
+background-image: url(:/image/image/image/pre.png);
+background-repeat:no-repeat;
+background-position:center center;
+border:none;
+}
+QPushButton:hover{
+background-image: url(:/image/image/image-hover/pre-hover.png);
+background-repeat:no-repeat;
+background-position:center center;
+}
+QPushButton:pressed{
+background-image: url(:/image/image/image/pre.png);
+background-repeat:no-repeat;
+background-position:center center;
+}
+</string>
+      </property>
       <property name="text">
-       <string>1</string>
+       <string/>
       </property>
      </widget>
     </item>
@@ -257,8 +278,30 @@
     </item>
     <item>
      <widget class="QPushButton" name="btnPlay">
+      <property name="styleSheet">
+       <string notr="true">QPushButton
+{
+background-image: url(:/image/image/image/pase.png);
+background-repeat:no-repeat;
+background-position:center center;
+border:none;
+}
+
+QPushButton:hover{
+background-image: url(:/image/image/image-hover/pase-hover.png);
+background-repeat:no-repeat;
+background-position:center center;
+}
+
+QPushButton:pressed{
+background-image: url(:/image/image/image/pase.png);
+background-repeat:no-repeat;
+background-position:center center;
+}
+</string>
+      </property>
       <property name="text">
-       <string>2</string>
+       <string/>
       </property>
      </widget>
     </item>
@@ -277,8 +320,31 @@
     </item>
     <item>
      <widget class="QPushButton" name="btnNext">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QPushButton
+{
+background-image: url(:/image/image/image/next.png);
+background-repeat:no-repeat;
+background-position:center center;
+border:none;
+}
+QPushButton:hover{
+background-image: url(:/image/image/image-hover/next-hover.png);
+background-repeat:no-repeat;
+background-position:center center;
+}
+QPushButton:pressed{
+background-image: url(:/image/image/image/next.png);
+background-repeat:no-repeat;
+background-position:center center;
+}
+</string>
+      </property>
       <property name="text">
-       <string>3</string>
+       <string/>
       </property>
      </widget>
     </item>
@@ -287,27 +353,347 @@
   <widget class="QPushButton" name="btnAdd">
    <property name="geometry">
     <rect>
-     <x>450</x>
-     <y>560</y>
-     <width>75</width>
-     <height>23</height>
+     <x>890</x>
+     <y>720</y>
+     <width>41</width>
+     <height>41</height>
     </rect>
    </property>
+   <property name="toolTip">
+    <string>添加本地音乐</string>
+   </property>
    <property name="text">
-    <string>PushButton</string>
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset resource="image.qrc">
+     <normaloff>:/image/image/image/addFromLocal.png</normaloff>:/image/image/image/addFromLocal.png</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>30</width>
+     <height>30</height>
+    </size>
+   </property>
+   <property name="flat">
+    <bool>true</bool>
    </property>
   </widget>
   <widget class="QPushButton" name="btnLyric">
    <property name="geometry">
     <rect>
-     <x>620</x>
-     <y>560</y>
-     <width>75</width>
-     <height>23</height>
+     <x>800</x>
+     <y>720</y>
+     <width>41</width>
+     <height>41</height>
     </rect>
    </property>
    <property name="text">
-    <string>词</string>
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset resource="image.qrc">
+     <normaloff>:/image/image/image/lyric.png</normaloff>:/image/image/image/lyric.png</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>30</width>
+     <height>30</height>
+    </size>
+   </property>
+   <property name="flat">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnCurMusic">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>90</y>
+     <width>131</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton
+{
+color:rgb(255, 255, 255);
+border-radius:0px;
+background-color: rgba(255, 255, 255,0);
+background-repeat:no-repeat;
+border:none;
+background-position:center center;
+}
+QPushButton:hover{
+	background-color: rgb(255, 255, 255,100);
+}
+QPushButton:pressed{
+background-color: rgba(95, 95, 95,100);
+border-color:rgba(255,255,255,30);
+border-style:inset;
+color:rgb(255, 255, 255);
+}
+</string>
+   </property>
+   <property name="text">
+    <string>当前播放</string>
+   </property>
+   <property name="icon">
+    <iconset resource="image.qrc">
+     <normaloff>:/image/image/image/current-music.png</normaloff>:/image/image/image/current-music.png</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>30</width>
+     <height>30</height>
+    </size>
+   </property>
+   <property name="flat">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnFavorMusic">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>150</y>
+     <width>131</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton
+{
+color:rgb(255, 255, 255);
+border-radius:0px;
+background-color: rgba(255, 255, 255,0);
+background-repeat:no-repeat;
+border:none;
+background-position:center center;
+}
+QPushButton:hover{
+	background-color: rgb(255, 255, 255,100);
+}
+QPushButton:pressed{
+background-color: rgba(95, 95, 95,100);
+border-color:rgba(255,255,255,30);
+border-style:inset;
+color:rgb(255, 255, 255);
+}
+</string>
+   </property>
+   <property name="text">
+    <string>我喜欢</string>
+   </property>
+   <property name="icon">
+    <iconset resource="image.qrc">
+     <normaloff>:/image/image/image/local-music.png</normaloff>:/image/image/image/local-music.png</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>30</width>
+     <height>30</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnLocalMusic">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>220</y>
+     <width>131</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton
+{
+color:rgb(255, 255, 255);
+border-radius:0px;
+background-color: rgba(255, 255, 255,0);
+background-repeat:no-repeat;
+border:none;
+background-position:center center;
+}
+QPushButton:hover{
+	background-color: rgb(255, 255, 255,100);
+}
+QPushButton:pressed{
+background-color: rgba(95, 95, 95,100);
+border-color:rgba(255,255,255,30);
+border-style:inset;
+color:rgb(255, 255, 255);
+}
+</string>
+   </property>
+   <property name="text">
+    <string>本地音乐</string>
+   </property>
+   <property name="icon">
+    <iconset resource="image.qrc">
+     <normaloff>:/image/image/image/favo-music.png</normaloff>:/image/image/image/favo-music.png</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>30</width>
+     <height>30</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QLabel" name="coverLabel">
+   <property name="geometry">
+    <rect>
+     <x>200</x>
+     <y>600</y>
+     <width>161</width>
+     <height>161</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="pixmap">
+    <pixmap resource="image.qrc">:/image/image/image/non-music.png</pixmap>
+   </property>
+   <property name="scaledContents">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QLabel" name="infoLabel">
+   <property name="geometry">
+    <rect>
+     <x>400</x>
+     <y>610</y>
+     <width>631</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color:rgb(255, 255, 255);</string>
+   </property>
+   <property name="text">
+    <string>KEEP CALM AND CARRY ON ...</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnPlayMode">
+   <property name="geometry">
+    <rect>
+     <x>710</x>
+     <y>720</y>
+     <width>35</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton
+{
+background-image: url(:/image/image/image/loop.png);
+background-repeat:no-repeat;
+background-position:center center;
+border:none;
+}
+
+QPushButton:hover{
+background-image: url(:/image/image/image-hover/loop-hover.png);
+background-repeat:no-repeat;
+background-position:center center;
+}
+
+QPushButton:pressed{
+background-image: url(:/image/image/image/loop.png);
+background-repeat:no-repeat;
+background-position:center center;
+}
+</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="positionLabel">
+   <property name="geometry">
+    <rect>
+     <x>960</x>
+     <y>660</y>
+     <width>141</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color:rgb(255, 255, 255);</string>
+   </property>
+   <property name="text">
+    <string>00:00/00:00</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnMin">
+   <property name="geometry">
+    <rect>
+     <x>1070</x>
+     <y>20</y>
+     <width>35</width>
+     <height>35</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton
+{
+border-radius:0px;
+background-image: url(:/image/image/image/min.png);
+background-color: rgba(255, 255, 255,0);
+background-repeat:no-repeat;
+border:none;
+background-position:center center;
+}
+QPushButton:hover{
+	background-color: rgb(255, 255, 255,100);
+}
+QPushButton:pressed{
+background-color: rgba(95, 95, 95,100);
+border-color:rgba(255,255,255,30);
+border-style:inset;
+color:rgba(0,0,0,100);
+}
+</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnQuit">
+   <property name="geometry">
+    <rect>
+     <x>1120</x>
+     <y>20</y>
+     <width>35</width>
+     <height>35</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton
+{
+border-radius:0px;
+background-image: url(:/image/image/image/quit.png);
+background-repeat:no-repeat;
+border:none;
+background-position:center center;
+
+}
+QPushButton:hover{
+
+background-color: rgba(230,0,0,0.5);
+}
+QPushButton:pressed{
+background-color: rgba(95, 95, 95,100);
+border-color:rgba(255,255,255,30);
+border-style:inset;
+color:rgba(0,0,0,100);
+
+}
+</string>
+   </property>
+   <property name="text">
+    <string/>
    </property>
   </widget>
  </widget>
@@ -324,6 +710,8 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="image.qrc"/>
+ </resources>
  <connections/>
 </ui>
