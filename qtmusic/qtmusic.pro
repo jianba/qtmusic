@@ -32,3 +32,5 @@ FORMS += \
 
 RESOURCES += \
     image.qrc
+
+RC_ICONS = QTMusic.ico

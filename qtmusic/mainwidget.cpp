@@ -12,6 +12,7 @@
 #include <QPainter>
 #include <QMessageBox>
 #include <QDebug>
+#include <QMouseEvent>
 
 MainWidget::MainWidget(QWidget *parent) :
     QWidget(parent),
@@ -35,7 +36,7 @@ MainWidget::MainWidget(QWidget *parent) :
 //    init_settings();
 
     //系统托盘初始化
-//    init_systemTrayIcon();
+    init_systemTrayIcon();
 }
 
 MainWidget::~MainWidget()
@@ -72,7 +73,6 @@ void MainWidget::init_UI()
 //    ui->favorMusicWidget->setIcon(QIcon(":/image/image/image/like.png"));
 //    ui->musicListWidget->setIcon(QIcon(":/image/image/image/MusicListItem.png"));
 }
-
 
 void MainWidget::init_play()
 {
@@ -161,6 +161,118 @@ void MainWidget::init_musicList()
         }
     }
 //    namelist_refresh();
+}
+
+
+void MainWidget::mousePressEvent(QMouseEvent *event)
+{
+    //实现点击界面中某点，音量条隐藏
+    int x=event->pos().x();
+    int y=event->pos().y();
+    int x_widget=ui->volumeSlider->geometry().x(); //注：这里“wiget”的名字是要从UI文件编译后生成的ui_xxx.h文件中得知（在UI布局中看不到）
+    int y_widget=ui->volumeSlider->geometry().y();
+    int w=ui->volumeSlider->geometry().width();
+    int h=ui->volumeSlider->geometry().height();
+    if(!(x>=x_widget&&x<=x_widget+w && y>=y_widget&&y<=y_widget+h)){
+        ui->volumeSlider->hide();
+    }
+
+    //记录窗口移动的初始位置
+    offset = event->globalPos() - pos();
+    event->accept();
+}
+
+void MainWidget::mouseMoveEvent(QMouseEvent *event)
+{
+    int x=event->pos().x();
+    int y=event->pos().y();
+    //注：这里“layoutWidget1”的名字是要从UI文件编译后生成的ui_xxx.h文件中得知（在UI布局中看不到）
+    if((y< ui->titleLabel_1->geometry().height())&&(x<ui->layoutWidget->geometry().x())){
+        move(event->globalPos() - offset);
+        event->accept();
+        setCursor(Qt::ClosedHandCursor);
+    }
+}
+
+void MainWidget::init_systemTrayIcon()
+{
+    mySystemTray=new QSystemTrayIcon(this);
+    mySystemTray->setIcon(QIcon(":/image/image/image/systemTrayIcon.png"));
+    mySystemTray->setToolTip(u8"LightMusicPlayer · By NJU-TJL");
+    connect(mySystemTray,&QSystemTrayIcon::activated,this,&MainWidget::systemTrayIcon_activated);
+    //添加菜单项
+    QAction *action_systemTray_pre = new QAction(QIcon(":/image/image/image/pre2.png"), u8"上一首");
+    connect(action_systemTray_pre, &QAction::triggered, this, &MainWidget::on_btnPre_clicked);
+    action_systemTray_play = new QAction(QIcon(":/image/image/image/play2.png"), u8"播放");
+    connect(action_systemTray_play, &QAction::triggered, this, &MainWidget::on_btnPlay_clicked);
+    QAction *action_systemTray_next = new QAction(QIcon(":/image/image/image/next2.png"), u8"下一首");
+    connect(action_systemTray_next, &QAction::triggered, this, &MainWidget::on_btnNext_clicked);
+    action_systemTray_playmode = new QAction(QIcon(":/image/image/image/loop2.png"), u8"循环播放");
+//    connect(action_systemTray_playmode, &QAction::triggered, this, &MainWidget::on_btnPlayMode_clicked);
+    QAction *action_systemTray_quit = new QAction(QIcon(":/image/image/image/exit.png"), u8"退出应用");
+    connect(action_systemTray_quit, &QAction::triggered, this, &MainWidget::quitMusicPlayer);
+
+    QMenu *pContextMenu = new QMenu(this);
+    pContextMenu->addAction(action_systemTray_pre);
+    pContextMenu->addAction(action_systemTray_play);
+    pContextMenu->addAction(action_systemTray_next);
+    pContextMenu->addAction(action_systemTray_playmode);
+    pContextMenu->addAction(action_systemTray_quit);
+    mySystemTray->setContextMenu(pContextMenu);
+    mySystemTray->show();
+}
+
+void MainWidget::systemTrayIcon_activated(QSystemTrayIcon::ActivationReason reason)
+{
+    switch (reason) {
+    case QSystemTrayIcon::DoubleClick:
+        //显/隐主界面
+        if(isHidden()){
+            show();
+        }else{
+            hide();
+        }
+        break;
+    default:
+        break;
+    }
+}
+
+void MainWidget::quitMusicPlayer()
+{
+    //退出应用
+    QCoreApplication::quit();
+}
+
+void MainWidget::mouseReleaseEvent(QMouseEvent *event)
+{
+    offset = QPoint();
+    event->accept();
+    setCursor(Qt::ArrowCursor);
+}
+
+void MainWidget::closeEvent(QCloseEvent *event)
+{
+    //最小化到托盘
+    if(!mySystemTray->isVisible()){
+        mySystemTray->show();
+    }
+    hide();
+    event->ignore();
+}
+
+void MainWidget::dragEnterEvent(QDragEnterEvent *event)
+{
+    event->acceptProposedAction();
+}
+
+void MainWidget::dropEvent(QDropEvent *event)
+{
+    QList<QUrl> urls = event->mimeData()->urls();
+    ui->localMusicWidget->musicList.addMusic(urls);
+    ui->localMusicWidget->refresh();
+    ui->stackedWidget->setCurrentIndex(1);//切换到本地音乐
+
 }
 
 
