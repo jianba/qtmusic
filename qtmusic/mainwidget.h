@@ -73,6 +73,7 @@ private slots:
     void on_btnLyric_clicked();
     void on_btnQuit_clicked();
     void on_btnMin_clicked();
+    void on_btnVolume_clicked();
 };
 
 #endif // MAINWIDGET_H

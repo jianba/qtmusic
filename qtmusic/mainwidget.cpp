@@ -7,6 +7,7 @@
 
 #include <QFileDialog>
 #include <QStandardPaths>
+#include <QScrollBar>
 #include <QtSql>
 #include <QPainter>
 #include <QMessageBox>
@@ -60,9 +61,9 @@ void MainWidget::init_UI()
     setWindowFlags(Qt::FramelessWindowHint);
 
     //UI初始化（.ui文件中无法完成的设置，这里补上）
-//    ui->volumeSlider->hide();
-//    ui->playListWidget->verticalScrollBar()->setStyleSheet(ListWidgetStyle());
-//    ui->localMusicWidget->vlerticalScrollBar()->setStyleSheet(ListWidgetStyle());
+    ui->volumeSlider->hide();
+    ui->playListWidget->verticalScrollBar()->setStyleSheet(ListWidgetStyle());
+    ui->localMusicWidget->verticalScrollBar()->setStyleSheet(ListWidgetStyle());
 //    ui->favorMusicWidget->verticalScrollBar()->setStyleSheet(ListWidgetStyle());
 //    ui->nameListWidget->verticalScrollBar()->setStyleSheet(ListWidgetStyle());
 //    ui->musicListWidget->verticalScrollBar()->setStyleSheet(ListWidgetStyle());
@@ -201,7 +202,7 @@ QString formatTime(qint64 timeMilliSeconds)
 void MainWidget::updatePosition(qint64 position)
 {
     ui->positionSlider->setValue(static_cast<int>(position));
-//    ui->positionLabel->setText(formatTime(position)+"/"+formatTime(player->duration()));
+    ui->positionLabel->setText(formatTime(position)+"/"+formatTime(player->duration()));
     if(playlist->currentIndex()>=0)ui->lyricWidget->show(position);
 }
 
@@ -211,10 +212,10 @@ void MainWidget::updateDuration(qint64 duration)
     ui->positionSlider->setEnabled(static_cast<int>(duration) > 0);
     if(!(static_cast<int>(duration) > 0)) {
         //无音乐播放时，界面元素
-//        ui->infoLabel->setText("KEEP CALM AND CARRY ON ...");
+        ui->infoLabel->setText("KEEP CALM AND CARRY ON ...");
 //        mySystemTray->setToolTip(u8"LightMusicPlayer · By NJU-TJL");
         QImage image(":/image/image/image/non-music.png");
-//        ui->coverLabel->setPixmap(QPixmap::fromImage(image));
+        ui->coverLabel->setPixmap(QPixmap::fromImage(image));
         ui->musicTitleLabel->setText("");
         ui->musicAlbumLabel->setText("");
         ui->musicAuthorLabel->setText("");
@@ -244,21 +245,21 @@ void MainWidget::updateInfo()
         QString albumTitle = player->metaData(QStringLiteral("AlbumTitle")).toString();
         info.append(" - "+title);
         info.append(" ["+formatTime(player->duration())+"]");
-//        ui->infoLabel->setText(info);
+        ui->infoLabel->setText(info);
 //        mySystemTray->setToolTip("正在播放："+info);
         //封面图片（应获取"ThumbnailImage" From: https://www.zhihu.com/question/36859497）
         QImage picImage= player->metaData(QStringLiteral("ThumbnailImage")).value<QImage>();
         if(picImage.isNull()) picImage=QImage(":/image/image/image/non-music.png");
-//        ui->coverLabel->setPixmap(QPixmap::fromImage(picImage));
-//        ui->coverLabel->setScaledContents(true);
+        ui->coverLabel->setPixmap(QPixmap::fromImage(picImage));
+        ui->coverLabel->setScaledContents(true);
         //改变正在播放歌曲的图标
-//        for(int i=0;i<playlist->mediaCount();i++){
-//            QListWidgetItem *p=ui->playListWidget->item(i);
-//            p->setIcon(ui->playListWidget->getIcon());
-//        }
+        for(int i=0;i<playlist->mediaCount();i++){
+            QListWidgetItem *p=ui->playListWidget->item(i);
+            p->setIcon(ui->playListWidget->getIcon());
+        }
         int index=playlist->currentIndex();
-//        QListWidgetItem *p =ui->playListWidget->item(index);
-//        p->setIcon(QIcon(":/image/image/image/music-playing.png"));
+        QListWidgetItem *p =ui->playListWidget->item(index);
+        p->setIcon(QIcon(":/image/image/image/music-playing.png"));
 
         //歌词界面显示的信息
         ui->musicTitleLabel->setText(title);
@@ -400,4 +401,14 @@ void MainWidget::on_btnQuit_clicked()
 void MainWidget::on_btnMin_clicked()
 {
     showMinimized();//窗口最小化
+}
+
+void MainWidget::on_btnVolume_clicked()
+{
+    if(ui->volumeSlider->isHidden()){
+        ui->volumeSlider->show();
+    }else{
+        ui->volumeSlider->hide();
+    }
+
 }
