@@ -36,7 +36,7 @@ border-image: url(:/image/image/background/default.jpg);
     <string notr="true">#stackedWidget{border:3px solid red}</string>
    </property>
    <property name="currentIndex">
-    <number>3</number>
+    <number>1</number>
    </property>
    <widget class="QWidget" name="page_1">
     <widget class="MusicListWidget" name="playListWidget">
@@ -932,7 +932,7 @@ color:rgb(255, 255, 255);
     <bool>true</bool>
    </property>
   </widget>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>1070</x>

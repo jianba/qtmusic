@@ -36,7 +36,7 @@ MainWidget::MainWidget(QWidget *parent) :
     init_musicList();
 
     //配置初始化
-//    init_settings();
+    init_settings();
 
     //系统托盘初始化
     init_systemTrayIcon();
@@ -153,24 +153,24 @@ void MainWidget::init_actions()
 //    menu_playlist->addAction(action_playlist_detail);
 //    menu_playlist->addAction(action_play_to_favor);
 
-//    //“本地音乐”列表右键菜单初始化
-//    ui->localMusicWidget->setContextMenuPolicy(Qt::CustomContextMenu);
-//    QAction *action_locallist_delete=new QAction(QIcon(":/image/image/image/remove.png"),u8"移除");
-//    connect(action_locallist_delete,&QAction::triggered,ui->localMusicWidget,&MusicListWidget::removeMusic);
-//    QAction *action_locallist_showfile=new QAction(QIcon(":/image/image/image/music-dir.png"),u8"打开所在文件夹");
-//    connect(action_locallist_showfile,&QAction::triggered,ui->localMusicWidget,&MusicListWidget::showInExplorer);
-//    QAction *action_locallist_detail=new QAction(QIcon(":/image/image/image/detail.png"),u8"歌曲详情");
-//    connect(action_locallist_detail,&QAction::triggered,ui->localMusicWidget,&MusicListWidget::detail);
-//    QAction *action_local_to_favor=new QAction(QIcon(":/image/image/image/To-like.png"),u8"添加到我喜欢");
+    //“本地音乐”列表右键菜单初始化
+    ui->localMusicWidget->setContextMenuPolicy(Qt::CustomContextMenu);
+    QAction *action_locallist_delete=new QAction(QIcon(":/image/image/image/remove.png"),u8"移除");
+    connect(action_locallist_delete,&QAction::triggered,ui->localMusicWidget,&MusicListWidget::removeMusic);
+    QAction *action_locallist_showfile=new QAction(QIcon(":/image/image/image/music-dir.png"),u8"打开所在文件夹");
+    connect(action_locallist_showfile,&QAction::triggered,ui->localMusicWidget,&MusicListWidget::showInExplorer);
+    QAction *action_locallist_detail=new QAction(QIcon(":/image/image/image/detail.png"),u8"歌曲详情");
+    connect(action_locallist_detail,&QAction::triggered,ui->localMusicWidget,&MusicListWidget::detail);
+    QAction *action_local_to_favor=new QAction(QIcon(":/image/image/image/To-like.png"),u8"添加到我喜欢");
 //    connect(action_local_to_favor,&QAction::triggered,this,&MainWidget::local_to_favor);
-//    QAction *action_local_to_playlist=new QAction(QIcon(":/image/image/image/To-playlist.png"),u8"添加到当前播放列表");
+    QAction *action_local_to_playlist=new QAction(QIcon(":/image/image/image/To-playlist.png"),u8"添加到当前播放列表");
 //    connect(action_local_to_playlist,&QAction::triggered,this,&MainWidget::local_to_playlist);
-//    menu_locallist=new QMenu(this);
-//    menu_locallist->addAction(action_locallist_delete);
-//    menu_locallist->addAction(action_locallist_showfile);
-//    menu_locallist->addAction(action_locallist_detail);
-//    menu_locallist->addAction(action_local_to_favor);
-//    menu_locallist->addAction(action_local_to_playlist);
+    menu_locallist=new QMenu(this);
+    menu_locallist->addAction(action_locallist_delete);
+    menu_locallist->addAction(action_locallist_showfile);
+    menu_locallist->addAction(action_locallist_detail);
+    menu_locallist->addAction(action_local_to_favor);
+    menu_locallist->addAction(action_local_to_playlist);
 
 //    //“我喜欢”列表右键菜单初始化
 //    ui->favorMusicWidget->setContextMenuPolicy(Qt::CustomContextMenu);
@@ -670,4 +670,18 @@ void MainWidget::on_btnVolume_clicked()
 void MainWidget::on_btnSkin_clicked()
 {
     menu_changeSkin->exec(QCursor::pos());
+}
+
+void MainWidget::on_volumeSlider_valueChanged(int value)
+{
+    player->setVolume(value);
+}
+
+void MainWidget::on_localMusicWidget_customContextMenuRequested(const QPoint &pos)
+{
+    if(ui->localMusicWidget->itemAt(pos)==Q_NULLPTR)
+    {
+        return;
+    }
+    menu_locallist->exec(QCursor::pos());
 }

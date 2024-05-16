@@ -121,6 +121,9 @@ private slots:
     void on_btnMin_clicked();
     void on_btnVolume_clicked();
     void on_btnSkin_clicked();
+private slots:
+    void on_volumeSlider_valueChanged(int value);
+    void on_localMusicWidget_customContextMenuRequested(const QPoint &pos);
 };
 
 #endif // MAINWIDGET_H
