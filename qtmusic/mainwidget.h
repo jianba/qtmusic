@@ -100,6 +100,11 @@ protected:
     void dropEvent(QDropEvent* event) override;
 
 private slots:
+    /*部分右键菜单项对应的操作（即对应QAction连接的槽函数）*/
+    void background_to_default();//换到默认背景
+    void background_setting();//自定义背景
+
+    /*一些点击事件的响应（使用.ui中的部件“转到槽”自动生成）*/
     void on_btnCurMusic_clicked();
 
     void on_btnLocalMusic_clicked();
@@ -115,6 +120,7 @@ private slots:
     void on_btnQuit_clicked();
     void on_btnMin_clicked();
     void on_btnVolume_clicked();
+    void on_btnSkin_clicked();
 };
 
 #endif // MAINWIDGET_H

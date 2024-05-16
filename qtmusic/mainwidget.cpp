@@ -26,6 +26,9 @@ MainWidget::MainWidget(QWidget *parent) :
     //初始化生成播放器模块及相关组件
     init_play();
 
+    // 初始化菜单
+    init_actions();
+
     //数据库初始化
     init_sqlite();
 
@@ -132,6 +135,95 @@ void MainWidget::init_sqlite()
     }
 }
 
+void MainWidget::init_actions()
+{
+//    //“当前播放”列表右键菜单初始化
+//    ui->playListWidget->setContextMenuPolicy(Qt::CustomContextMenu);
+//    QAction *action_playlist_delete=new QAction(QIcon(":/image/image/image/remove.png"),u8"移除");
+//    connect(action_playlist_delete,&QAction::triggered,this,&MainWidget::playlist_removeMusic);
+//    QAction *action_playlist_showfile=new QAction(QIcon(":/image/image/image/music-dir.png"),u8"打开所在文件夹");
+//    connect(action_playlist_showfile,&QAction::triggered,ui->playListWidget,&MusicListWidget::showInExplorer);
+//    QAction *action_playlist_detail=new QAction(QIcon(":/image/image/image/detail.png"),u8"歌曲详情");
+//    connect(action_playlist_detail,&QAction::triggered,ui->playListWidget,&MusicListWidget::detail);
+//    QAction *action_play_to_favor=new QAction(QIcon(":/image/image/image/To-like.png"),u8"添加到我喜欢");
+//    connect(action_play_to_favor,&QAction::triggered,this,&MainWidget::play_to_favor);
+//    menu_playlist=new QMenu(this);
+//    menu_playlist->addAction(action_playlist_delete);
+//    menu_playlist->addAction(action_playlist_showfile);
+//    menu_playlist->addAction(action_playlist_detail);
+//    menu_playlist->addAction(action_play_to_favor);
+
+//    //“本地音乐”列表右键菜单初始化
+//    ui->localMusicWidget->setContextMenuPolicy(Qt::CustomContextMenu);
+//    QAction *action_locallist_delete=new QAction(QIcon(":/image/image/image/remove.png"),u8"移除");
+//    connect(action_locallist_delete,&QAction::triggered,ui->localMusicWidget,&MusicListWidget::removeMusic);
+//    QAction *action_locallist_showfile=new QAction(QIcon(":/image/image/image/music-dir.png"),u8"打开所在文件夹");
+//    connect(action_locallist_showfile,&QAction::triggered,ui->localMusicWidget,&MusicListWidget::showInExplorer);
+//    QAction *action_locallist_detail=new QAction(QIcon(":/image/image/image/detail.png"),u8"歌曲详情");
+//    connect(action_locallist_detail,&QAction::triggered,ui->localMusicWidget,&MusicListWidget::detail);
+//    QAction *action_local_to_favor=new QAction(QIcon(":/image/image/image/To-like.png"),u8"添加到我喜欢");
+//    connect(action_local_to_favor,&QAction::triggered,this,&MainWidget::local_to_favor);
+//    QAction *action_local_to_playlist=new QAction(QIcon(":/image/image/image/To-playlist.png"),u8"添加到当前播放列表");
+//    connect(action_local_to_playlist,&QAction::triggered,this,&MainWidget::local_to_playlist);
+//    menu_locallist=new QMenu(this);
+//    menu_locallist->addAction(action_locallist_delete);
+//    menu_locallist->addAction(action_locallist_showfile);
+//    menu_locallist->addAction(action_locallist_detail);
+//    menu_locallist->addAction(action_local_to_favor);
+//    menu_locallist->addAction(action_local_to_playlist);
+
+//    //“我喜欢”列表右键菜单初始化
+//    ui->favorMusicWidget->setContextMenuPolicy(Qt::CustomContextMenu);
+//    QAction *action_favorlist_delete = new QAction(QIcon(":/image/image/image/remove.png"),u8"移除");
+//	connect(action_favorlist_delete, &QAction::triggered, ui->favorMusicWidget, &MusicListWidget::removeMusic);
+//	QAction *action_favorlist_showfile = new QAction(QIcon(":/image/image/image/music-dir.png"),u8"打开所在文件夹");
+//	connect(action_favorlist_showfile, &QAction::triggered, ui->favorMusicWidget, &MusicListWidget::showInExplorer);
+//	QAction *action_favorlist_detail = new QAction(QIcon(":/image/image/image/detail.png"),u8"歌曲详情");
+//	connect(action_favorlist_detail, &QAction::triggered, ui->favorMusicWidget, &MusicListWidget::detail);
+//    QAction *action_favor_to_playlist=new QAction(QIcon(":/image/image/image/To-playlist.png"),u8"添加到当前播放列表");
+//    connect(action_favor_to_playlist,&QAction::triggered,this,&MainWidget::favor_to_playlist);
+//	menu_favorlist = new QMenu(this);
+//	menu_favorlist->addAction(action_favorlist_delete);
+//	menu_favorlist->addAction(action_favorlist_showfile);
+//	menu_favorlist->addAction(action_favorlist_detail);
+//    menu_favorlist->addAction(action_favor_to_playlist);
+
+//    //“我的歌单”列表右键菜单初始化
+//    ui->nameListWidget->setContextMenuPolicy(Qt::CustomContextMenu);
+//    QAction *action_namelist_delete=new QAction(QIcon(":/image/image/image/remove.png"),u8"删除");
+//    connect(action_namelist_delete,&QAction::triggered,this,&MainWidget::namelist_delete);
+//    menu_namelist=new QMenu(this);
+//    menu_namelist->addAction(action_namelist_delete);
+
+//    //歌单展示列表右键菜单初始化
+//    ui->musicListWidget->setContextMenuPolicy(Qt::CustomContextMenu);
+//    QAction *action_musiclist_delete = new QAction(QIcon(":/image/image/image/remove.png"), u8"移除");
+//    connect(action_musiclist_delete, &QAction::triggered, this, &MainWidget::musiclist_removeMusic);
+//    QAction *action_musiclist_showfile = new QAction(QIcon(":/image/image/image/music-dir.png"), u8"打开所在文件夹");
+//    connect(action_musiclist_showfile, &QAction::triggered, ui->musicListWidget, &MusicListWidget::showInExplorer);
+//    QAction *action_musiclist_detail = new QAction(QIcon(":/image/image/image/detail.png"), u8"歌曲详情");
+//    connect(action_musiclist_detail, &QAction::triggered, ui->musicListWidget, &MusicListWidget::detail);
+//    QAction *action_musiclist_to_favor = new QAction(QIcon(":/image/image/image/To-like.png"), u8"添加到我喜欢");
+//    connect(action_musiclist_to_favor, &QAction::triggered, this, &MainWidget::musiclist_to_favor);
+//    QAction *action_musiclist_to_playlist = new QAction(QIcon(":/image/image/image/To-playlist.png"), u8"添加到当前播放列表");
+//    connect(action_musiclist_to_playlist, &QAction::triggered, this, &MainWidget::musiclist_to_playlist);
+//    menu_musiclist = new QMenu(this);
+//    menu_musiclist->addAction(action_musiclist_delete);
+//    menu_musiclist->addAction(action_musiclist_showfile);
+//    menu_musiclist->addAction(action_musiclist_detail);
+//    menu_musiclist->addAction(action_musiclist_to_favor);
+//    menu_musiclist->addAction(action_musiclist_to_playlist);
+
+    //“换肤”的菜单项
+    QAction *action_backgroud_to_default = new QAction(QIcon(":/image/image/image/default.png"),u8"更换到默认背景");
+    connect(action_backgroud_to_default,&QAction::triggered,this,&MainWidget::background_to_default);
+    QAction *action_backgroud_setting=new QAction(QIcon(":/image/image/image/setting.png"),u8"自定义背景");
+    connect(action_backgroud_setting,&QAction::triggered,this,&MainWidget::background_setting);
+    menu_changeSkin=new QMenu(this);
+    menu_changeSkin->addAction(action_backgroud_to_default);
+    menu_changeSkin->addAction(action_backgroud_setting);
+}
+
 void MainWidget::init_musicList()
 {
     //本地音乐 初始化
@@ -163,6 +255,56 @@ void MainWidget::init_musicList()
 //    namelist_refresh();
 }
 
+void MainWidget::init_settings()
+{
+    QSettings mysettings("./LightMusicPlayer.ini",QSettings::IniFormat);
+    mysettings.setIniCodec("UTF8");
+    QString fileName = mysettings.value("background/image-url").toString();
+    QImage testImage(fileName);
+    if(!fileName.isEmpty()&&!testImage.isNull())
+    {
+        setStyleSheet(QString("QWidget#MainWidget{"
+                              "border-radius:10px;"
+                              "border-image: url(%1);}").arg(fileName));
+    }else{
+        fileName=":/image/image/background/default.jpg";
+        QSettings mysettings("./LightMusicPlayer.ini",QSettings::IniFormat);
+        mysettings.setIniCodec("UTF8");
+        mysettings.setValue("background/image-url",fileName);
+        setStyleSheet(QString("QWidget#MainWidget{"
+                              "border-radius:10px;"
+                              "border-image: url(%1);}").arg(fileName));
+    }
+}
+
+void MainWidget::background_to_default()
+{
+    QString fileName=":/image/image/background/default.jpg";
+    QSettings mysettings("./LightMusicPlayer.ini",QSettings::IniFormat);
+    mysettings.setIniCodec("UTF8");
+    mysettings.setValue("background/image-url",fileName);
+    setStyleSheet(QString("QWidget#MainWidget{"
+                          "border-radius:10px;"
+                          "border-image: url(%1);}").arg(fileName));
+}
+
+void MainWidget::background_setting()
+{
+    //从默认图片位置打开文件选择框
+    QString fileName=QFileDialog::getOpenFileName(this,("选择自定义背景图片"),QStandardPaths::standardLocations(QStandardPaths::PicturesLocation).first(),u8"图片文件(*jpg *png)");
+    if(!fileName.isEmpty())
+    {
+        QImage testImage(fileName);
+        if(!testImage.isNull()){
+            QSettings mysettings("./LightMusicPlayer.ini",QSettings::IniFormat);
+            mysettings.setIniCodec("UTF8");
+            mysettings.setValue("background/image-url",fileName);
+            setStyleSheet(QString("QWidget#MainWidget{"
+                                  "border-radius:10px;"
+                                  "border-image: url(%1);}").arg(fileName));
+        }
+    }
+}
 
 void MainWidget::mousePressEvent(QMouseEvent *event)
 {
@@ -523,4 +665,9 @@ void MainWidget::on_btnVolume_clicked()
         ui->volumeSlider->hide();
     }
 
+}
+
+void MainWidget::on_btnSkin_clicked()
+{
+    menu_changeSkin->exec(QCursor::pos());
 }
